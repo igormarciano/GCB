@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react"
-import { Search, MoreHorizontal, ListFilter, Check, Clock, CheckCircle2, XCircle, TrendingUp } from "lucide-react"
+import { Search, ListFilter, Check, Clock, CheckCircle2, XCircle, TrendingUp } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -13,6 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Input } from "@/components/ui/input"
+import { cn } from "@/lib/utils"
 import {
   Table,
   TableBody,
@@ -184,25 +185,16 @@ export function FilaScreen({ solicitacoes, onAbrir }: FilaScreenProps) {
                         className="py-5 pr-6 text-right"
                         onClick={(e) => e.stopPropagation()}
                       >
-                        <DropdownMenu>
-                          <DropdownMenuTrigger asChild>
-                            <Button
-                              variant="ghost"
-                              size="icon"
-                              className="opacity-60 group-hover:opacity-100"
-                              aria-label={`Acoes da solicitacao ${s.numero}`}
-                            >
-                              <MoreHorizontal className="size-4" />
-                            </Button>
-                          </DropdownMenuTrigger>
-                          <DropdownMenuContent align="end">
-                            <DropdownMenuItem onClick={() => onAbrir(s.id)}>
-                              {s.status === "PENDENTE"
-                                ? "Analisar"
-                                : "Ver detalhe"}
-                            </DropdownMenuItem>
-                          </DropdownMenuContent>
-                        </DropdownMenu>
+                        <Button
+                          size="sm"
+                          variant={s.status === "PENDENTE" ? "default" : "ghost"}
+                          className={cn(
+                            s.status !== "PENDENTE" && "text-muted-foreground"
+                          )}
+                          onClick={() => onAbrir(s.id)}
+                        >
+                          {s.status === "PENDENTE" ? "Analisar" : "Ver detalhe"}
+                        </Button>
                       </TableCell>
                     </TableRow>
                   )
