@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react"
-import { Search, MoreHorizontal, ListFilter, Check, Clock, CheckCircle2, XCircle } from "lucide-react"
+import { Search, MoreHorizontal, ListFilter, Check, Clock, CheckCircle2, XCircle, TrendingUp } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -253,7 +253,7 @@ function ResumoCardValor({ rotulo, valor }: { rotulo: string; valor: number }) {
               {formatBRL(valor)}
             </div>
           </div>
-          <CheckCircle2 className="size-5 mt-0.5 text-success" />
+          <TrendingUp className="size-5 mt-0.5 text-primary" />
         </div>
       </CardContent>
     </Card>
