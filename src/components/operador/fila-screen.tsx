@@ -13,7 +13,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Input } from "@/components/ui/input"
-import { cn } from "@/lib/utils"
 import {
   Table,
   TableBody,
@@ -28,6 +27,7 @@ import {
   type StatusSolicitacao,
 } from "@/lib/domain"
 import { formatBRL, formatDateBR } from "@/lib/format"
+import { cn } from "@/lib/utils"
 
 interface FilaScreenProps {
   solicitacoes: Solicitacao[]
@@ -49,9 +49,7 @@ const PRIORIDADE: Record<StatusSolicitacao, number> = {
 
 export function FilaScreen({ solicitacoes, onAbrir }: FilaScreenProps) {
   const [busca, setBusca] = useState("")
-  const [statusFiltro, setStatusFiltro] = useState<
-    StatusSolicitacao | "TODAS"
-  >("TODAS")
+  const [statusFiltro, setStatusFiltro] = useState<StatusSolicitacao | "TODAS">("TODAS")
 
   const aAnalisar = solicitacoes.filter((s) => s.status === "PENDENTE").length
   const aprovadas = solicitacoes.filter((s) => s.status === "APROVADA").length
@@ -81,10 +79,10 @@ export function FilaScreen({ solicitacoes, onAbrir }: FilaScreenProps) {
   return (
     <div className="space-y-6">
       <div className="space-y-3">
-        <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">
-          Visao geral
+        <h2 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+          Visão geral
         </h2>
-        <div className="grid gap-4 sm:grid-cols-4">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <ResumoCard rotulo="A analisar" valor={aAnalisar} Icon={Clock} iconClass="text-warning" />
           <ResumoCard rotulo="Aprovadas" valor={aprovadas} Icon={CheckCircle2} iconClass="text-success" />
           <ResumoCard rotulo="Reprovadas" valor={reprovadas} Icon={XCircle} iconClass="text-destructive" />
@@ -96,11 +94,11 @@ export function FilaScreen({ solicitacoes, onAbrir }: FilaScreenProps) {
         <div className="relative w-full sm:max-w-xs">
           <Search className="pointer-events-none absolute left-2.5 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
           <Input
-            placeholder="Buscar por fornecedor ou numero"
+            placeholder="Buscar por fornecedor ou número"
             value={busca}
             onChange={(e) => setBusca(e.target.value)}
             className="pl-8 bg-white"
-            aria-label="Buscar solicitacoes"
+            aria-label="Buscar solicitações"
           />
         </div>
 
@@ -131,14 +129,14 @@ export function FilaScreen({ solicitacoes, onAbrir }: FilaScreenProps) {
         <CardContent className="px-0">
           <Table>
             <TableHeader>
-              <TableRow>
-                <TableHead className="pl-6">Solicitacao</TableHead>
-                <TableHead>Fornecedor (cedente)</TableHead>
-                <TableHead className="text-center">Notas</TableHead>
-                <TableHead className="text-right">Valor total</TableHead>
-                <TableHead>Data</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead className="pr-6 text-right">Acoes</TableHead>
+              <TableRow className="hover:bg-transparent">
+                <TableHead className="pl-6 font-semibold text-foreground">Nº</TableHead>
+                <TableHead className="font-semibold text-foreground">Fornecedor (cedente)</TableHead>
+                <TableHead className="text-center font-semibold text-foreground">Notas</TableHead>
+                <TableHead className="text-right font-semibold text-foreground">Valor total</TableHead>
+                <TableHead className="font-semibold text-foreground">Data</TableHead>
+                <TableHead className="font-semibold text-foreground">Status</TableHead>
+                <TableHead className="pr-6 text-right font-semibold text-foreground">Ação</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -148,7 +146,7 @@ export function FilaScreen({ solicitacoes, onAbrir }: FilaScreenProps) {
                     colSpan={7}
                     className="h-32 text-center text-muted-foreground"
                   >
-                    Nenhuma solicitacao encontrada com esses filtros.
+                    Nenhuma solicitação encontrada com esses filtros.
                   </TableCell>
                 </TableRow>
               ) : (
@@ -160,11 +158,11 @@ export function FilaScreen({ solicitacoes, onAbrir }: FilaScreenProps) {
                       className="group cursor-pointer"
                       onClick={() => onAbrir(s.id)}
                     >
-                      <TableCell className="py-5 pl-6 font-medium">
+                      <TableCell className="py-5 pl-6 font-mono text-sm font-medium text-muted-foreground">
                         {s.numero}
                       </TableCell>
                       <TableCell className="py-5">
-                        <div>{s.fornecedor}</div>
+                        <div className="font-medium">{s.fornecedor}</div>
                         <div className="text-xs text-muted-foreground">
                           {s.cnpj}
                         </div>

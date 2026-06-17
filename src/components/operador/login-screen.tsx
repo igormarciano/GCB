@@ -16,9 +16,6 @@ interface LoginScreenProps {
   onAuth: () => void
 }
 
-// Tela O0 — Login do Operador (CEMIG). Auth mockada: qualquer credencial
-// preenchida entra. Estado de erro apenas demonstrativo. No produto real a
-// autenticacao e AWS Cognito (PRD secao 11), fora do escopo deste prototipo.
 export function LoginScreen({ onAuth }: LoginScreenProps) {
   const [email, setEmail] = useState("")
   const [senha, setSenha] = useState("")
@@ -35,7 +32,6 @@ export function LoginScreen({ onAuth }: LoginScreenProps) {
     }
 
     setCarregando(true)
-    // Simula uma chamada de autenticacao.
     setTimeout(() => {
       setCarregando(false)
       onAuth()
@@ -43,18 +39,18 @@ export function LoginScreen({ onAuth }: LoginScreenProps) {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-muted/40 p-4">
+    <div className="flex min-h-screen items-center justify-center bg-background p-4">
       <Card className="w-full max-w-sm">
-        <CardHeader className="items-center gap-3 text-center">
+        <CardHeader className="items-center gap-4 text-center pb-2">
           <Brand className="justify-center" />
           <div className="space-y-1">
             <CardTitle className="text-xl">Portal do Operador</CardTitle>
             <CardDescription>
-              Acesse para analisar e decidir solicitacoes de antecipacao.
+              Acesse para analisar e decidir solicitações de antecipação.
             </CardDescription>
           </div>
         </CardHeader>
-        <CardContent>
+        <CardContent className="pt-4">
           <form onSubmit={handleSubmit} className="space-y-4" noValidate>
             <div className="space-y-2">
               <Label htmlFor="email">E-mail corporativo</Label>
@@ -82,11 +78,8 @@ export function LoginScreen({ onAuth }: LoginScreenProps) {
             </div>
 
             {erro && (
-              <p
-                role="alert"
-                className="text-sm font-medium text-destructive"
-              >
-                Credenciais invalidas. Verifique o e-mail e a senha.
+              <p role="alert" className="text-sm font-medium text-destructive">
+                Credenciais inválidas. Verifique o e-mail e a senha.
               </p>
             )}
 

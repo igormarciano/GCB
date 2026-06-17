@@ -1,9 +1,5 @@
 import { useState } from "react"
-import {
-  ArrowLeft,
-  Check,
-  X,
-} from "lucide-react"
+import { ArrowLeft, Check, X } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -74,7 +70,7 @@ export function DetalheScreen({
   }
 
   return (
-    <div className="space-y-6 max-w-3xl mx-auto">
+    <div className="mx-auto max-w-3xl space-y-6">
       <Button
         variant="ghost"
         size="sm"
@@ -87,7 +83,7 @@ export function DetalheScreen({
 
       <div className="flex flex-wrap items-center gap-3">
         <h2 className="text-xl font-semibold tracking-tight">
-          Solicitacao {solicitacao.numero}
+          Solicitação {solicitacao.numero}
         </h2>
         <Badge variant={meta.variant}>{meta.label}</Badge>
       </div>
@@ -109,11 +105,11 @@ export function DetalheScreen({
         <CardContent className="px-0">
           <Table>
             <TableHeader>
-              <TableRow>
-                <TableHead className="pl-6">Nota fiscal</TableHead>
-                <TableHead>Sacado</TableHead>
-                <TableHead>Vencimento</TableHead>
-                <TableHead className="pr-6 text-right">Valor</TableHead>
+              <TableRow className="hover:bg-transparent">
+                <TableHead className="pl-6 font-semibold text-foreground">Nota fiscal</TableHead>
+                <TableHead className="font-semibold text-foreground">Sacado</TableHead>
+                <TableHead className="font-semibold text-foreground">Vencimento</TableHead>
+                <TableHead className="pr-6 text-right font-semibold text-foreground">Valor</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -130,7 +126,7 @@ export function DetalheScreen({
                 </TableRow>
               ))}
               <TableRow className="border-t-2 hover:bg-transparent">
-                <TableCell className="pl-6 font-medium" colSpan={3}>
+                <TableCell className="pl-6 font-semibold" colSpan={3}>
                   Valor total
                 </TableCell>
                 <TableCell className="pr-6 text-right font-semibold tabular-nums">
@@ -142,16 +138,16 @@ export function DetalheScreen({
         </CardContent>
       </Card>
 
-      <Card>
+      <Card className={pendente ? "border-primary/30" : undefined}>
         <CardHeader>
-          <CardTitle className="text-base">Decisao</CardTitle>
+          <CardTitle className="text-base">Decisão</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           {pendente ? (
             <>
               <p className="text-sm text-muted-foreground">
-                A decisao sera comunicada ao fornecedor por e-mail e no portal.
-                A aprovacao e por inteiro, sem aprovacao parcial.
+                A decisão será comunicada ao fornecedor por e-mail e no portal.
+                A aprovação é por inteiro, sem aprovação parcial.
               </p>
               <div className="flex gap-2">
                 <Button
@@ -159,7 +155,7 @@ export function DetalheScreen({
                   onClick={() => setConfirmarAprovar(true)}
                 >
                   <Check className="size-4" />
-                  Aprovar solicitacao
+                  Aprovar solicitação
                 </Button>
                 <Button
                   variant="destructive"
@@ -172,19 +168,15 @@ export function DetalheScreen({
             </>
           ) : solicitacao.status === "APROVADA" ? (
             <div className="rounded-md border border-success/30 bg-success/10 p-3 text-sm">
-              <div className="font-medium text-foreground">
-                Solicitacao aprovada
-              </div>
+              <div className="font-medium text-foreground">Solicitação aprovada</div>
               <p className="mt-1 text-muted-foreground">
-                O fornecedor foi avisado. O credito cai na conta em ate 24h
-                apos o desembolso da CEMIG.
+                O fornecedor foi avisado. O crédito cai na conta em até 24h
+                após o desembolso da CEMIG.
               </p>
             </div>
           ) : (
             <div className="rounded-md border border-destructive/30 bg-destructive/10 p-3 text-sm">
-              <div className="font-medium text-foreground">
-                Solicitacao reprovada
-              </div>
+              <div className="font-medium text-foreground">Solicitação reprovada</div>
               {solicitacao.motivoReprovacao && (
                 <p className="mt-1 text-muted-foreground">
                   {solicitacao.motivoReprovacao}
@@ -198,11 +190,11 @@ export function DetalheScreen({
       <Dialog open={confirmarAprovar} onOpenChange={setConfirmarAprovar}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Aprovar solicitacao {solicitacao.numero}?</DialogTitle>
+            <DialogTitle>Aprovar solicitação {solicitacao.numero}?</DialogTitle>
             <DialogDescription>
               {solicitacao.notas.length} nota(s) &middot;{" "}
               {formatBRL(solicitacao.valorTotal)} para {solicitacao.fornecedor}.
-              As notas passam a Antecipado e o fornecedor e notificado.
+              As notas passam a Antecipado e o fornecedor é notificado.
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
@@ -218,7 +210,7 @@ export function DetalheScreen({
               onClick={aprovar}
               disabled={processando}
             >
-              {processando ? "Aprovando..." : "Confirmar aprovacao"}
+              {processando ? "Aprovando..." : "Confirmar aprovação"}
             </Button>
           </DialogFooter>
         </DialogContent>
@@ -227,16 +219,14 @@ export function DetalheScreen({
       <Dialog open={abrirReprovar} onOpenChange={setAbrirReprovar}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>
-              Reprovar solicitacao {solicitacao.numero}
-            </DialogTitle>
+            <DialogTitle>Reprovar solicitação {solicitacao.numero}</DialogTitle>
             <DialogDescription>
               O motivo aparece para o fornecedor. Seja claro e construtivo para
               reduzir retrabalho.
             </DialogDescription>
           </DialogHeader>
           <Textarea
-            placeholder="Descreva o motivo da reprovacao"
+            placeholder="Descreva o motivo da reprovação"
             value={motivo}
             onChange={(e) => setMotivo(e.target.value)}
             rows={4}
@@ -255,7 +245,7 @@ export function DetalheScreen({
               onClick={reprovar}
               disabled={processando || !motivo.trim()}
             >
-              {processando ? "Reprovando..." : "Confirmar reprovacao"}
+              {processando ? "Reprovando..." : "Confirmar reprovação"}
             </Button>
           </DialogFooter>
         </DialogContent>

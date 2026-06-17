@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react"
+import { Menu } from "lucide-react"
 
 import { OperadorSidebar, type NavKey } from "@/components/operador/sidebar"
 import { FilaScreen } from "@/components/operador/fila-screen"
@@ -16,7 +17,7 @@ type Route =
 const HEADER: Record<NavKey, { titulo: string; subtitulo: string }> = {
   fila: {
     titulo: "Fila",
-    subtitulo: "Solicitacoes de antecipacao a analisar",
+    subtitulo: "Solicitações de antecipação a analisar",
   },
   conta: {
     titulo: "Conta",
@@ -31,6 +32,7 @@ interface PortalOperadorProps {
 export function PortalOperador({ onLogout }: PortalOperadorProps) {
   const [solicitacoes, setSolicitacoes] = useState<Solicitacao[]>(SOLICITACOES)
   const [route, setRoute] = useState<Route>({ name: "fila" })
+  const [menuMobileAberto, setMenuMobileAberto] = useState(false)
 
   const navAtivo: NavKey = route.name === "detalhe" ? "fila" : (route.name as NavKey)
 
@@ -57,8 +59,8 @@ export function PortalOperador({ onLogout }: PortalOperadorProps) {
                 {
                   rotulo:
                     decisao === "APROVADA"
-                      ? "Solicitacao aprovada"
-                      : "Solicitacao reprovada",
+                      ? "Solicitação aprovada"
+                      : "Solicitação reprovada",
                   ator: "Operador CEMIG",
                   data: agora,
                 },
@@ -85,22 +87,34 @@ export function PortalOperador({ onLogout }: PortalOperadorProps) {
         active={navAtivo}
         onNavigate={navegar}
         onLogout={onLogout}
+        mobileAberto={menuMobileAberto}
+        onMobileFechar={() => setMenuMobileAberto(false)}
       />
 
       <div className="flex min-w-0 flex-1 flex-col">
-        <header className="flex h-16 items-center justify-between gap-4 border-b bg-card px-6">
-          <div className="min-w-0">
-            <h1 className="truncate text-lg font-semibold tracking-tight">
-              {header.titulo}
-            </h1>
-            <p className="truncate text-sm text-muted-foreground">
-              {header.subtitulo}
-            </p>
+        <header className="flex h-16 items-center justify-between gap-4 border-b bg-card px-4 sm:px-6">
+          <div className="flex items-center gap-3 min-w-0">
+            <button
+              type="button"
+              onClick={() => setMenuMobileAberto(true)}
+              className="rounded-md p-1.5 text-muted-foreground hover:bg-accent hover:text-foreground md:hidden"
+              aria-label="Abrir menu"
+            >
+              <Menu className="size-5" />
+            </button>
+            <div className="min-w-0">
+              <h1 className="truncate text-lg font-semibold tracking-tight">
+                {header.titulo}
+              </h1>
+              <p className="hidden truncate text-sm text-muted-foreground sm:block">
+                {header.subtitulo}
+              </p>
+            </div>
           </div>
           <img src={logoCemig} alt="CEMIG" className="h-6 w-auto shrink-0" />
         </header>
 
-        <main className="flex-1 p-6">
+        <main className="flex-1 p-4 sm:p-6">
           {route.name === "fila" && (
             <FilaScreen
               solicitacoes={solicitacoes}
@@ -122,7 +136,7 @@ export function PortalOperador({ onLogout }: PortalOperadorProps) {
               />
             ) : (
               <p className="text-muted-foreground">
-                Solicitacao nao encontrada.
+                Solicitação não encontrada.
               </p>
             ))}
         </main>

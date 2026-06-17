@@ -1,11 +1,9 @@
 import type { Solicitacao } from "@/lib/domain"
 
-// Dados mockados (MVP sem backend). O sacado e sempre a CEMIG na v1;
-// variam os fornecedores (cedentes).
 export const SOLICITACOES: Solicitacao[] = [
   {
     id: "1",
-    numero: "SOL-2041",
+    numero: "00001",
     fornecedor: "Eletrosul Montagens Ltda",
     cnpj: "12.345.678/0001-90",
     valorTotal: 184320.5,
@@ -18,7 +16,7 @@ export const SOLICITACOES: Solicitacao[] = [
     ],
     historico: [
       {
-        rotulo: "Solicitacao enviada",
+        rotulo: "Solicitação enviada",
         ator: "Eletrosul Montagens Ltda",
         data: "2026-06-16T09:12:00",
       },
@@ -26,7 +24,7 @@ export const SOLICITACOES: Solicitacao[] = [
   },
   {
     id: "2",
-    numero: "SOL-2040",
+    numero: "00002",
     fornecedor: "Construtora Vale Verde S.A.",
     cnpj: "98.765.432/0001-10",
     valorTotal: 47800,
@@ -35,7 +33,7 @@ export const SOLICITACOES: Solicitacao[] = [
     notas: [{ numero: "NF-30188", valor: 47800, vencimento: "2026-07-10" }],
     historico: [
       {
-        rotulo: "Solicitacao enviada",
+        rotulo: "Solicitação enviada",
         ator: "Construtora Vale Verde S.A.",
         data: "2026-06-16T08:47:00",
       },
@@ -43,8 +41,8 @@ export const SOLICITACOES: Solicitacao[] = [
   },
   {
     id: "3",
-    numero: "SOL-2039",
-    fornecedor: "TecnoServ Manutencao Eletrica",
+    numero: "00003",
+    fornecedor: "TecnoServ Manutenção Elétrica",
     cnpj: "23.456.789/0001-01",
     valorTotal: 312045.9,
     dataSolicitacao: "2026-06-15T17:30:00",
@@ -56,16 +54,16 @@ export const SOLICITACOES: Solicitacao[] = [
     ],
     historico: [
       {
-        rotulo: "Solicitacao enviada",
-        ator: "TecnoServ Manutencao Eletrica",
+        rotulo: "Solicitação enviada",
+        ator: "TecnoServ Manutenção Elétrica",
         data: "2026-06-15T17:30:00",
       },
     ],
   },
   {
     id: "4",
-    numero: "SOL-2038",
-    fornecedor: "Metalurgica Pampa Ltda",
+    numero: "00004",
+    fornecedor: "Metalúrgica Pampa Ltda",
     cnpj: "34.567.890/0001-12",
     valorTotal: 96150,
     dataSolicitacao: "2026-06-15T14:05:00",
@@ -76,15 +74,15 @@ export const SOLICITACOES: Solicitacao[] = [
     ],
     historico: [
       {
-        rotulo: "Solicitacao enviada",
-        ator: "Metalurgica Pampa Ltda",
+        rotulo: "Solicitação enviada",
+        ator: "Metalúrgica Pampa Ltda",
         data: "2026-06-15T14:05:00",
       },
     ],
   },
   {
     id: "5",
-    numero: "SOL-2037",
+    numero: "00005",
     fornecedor: "Redes & Postes Engenharia",
     cnpj: "45.678.901/0001-23",
     valorTotal: 228900.75,
@@ -97,12 +95,12 @@ export const SOLICITACOES: Solicitacao[] = [
     ],
     historico: [
       {
-        rotulo: "Solicitacao enviada",
+        rotulo: "Solicitação enviada",
         ator: "Redes & Postes Engenharia",
         data: "2026-06-15T11:20:00",
       },
       {
-        rotulo: "Solicitacao aprovada",
+        rotulo: "Solicitação aprovada",
         ator: "Operador CEMIG",
         data: "2026-06-15T15:42:00",
       },
@@ -110,23 +108,23 @@ export const SOLICITACOES: Solicitacao[] = [
   },
   {
     id: "6",
-    numero: "SOL-2036",
-    fornecedor: "Sul Transmissao Servicos Ltda",
+    numero: "00006",
+    fornecedor: "Sul Transmissão Serviços Ltda",
     cnpj: "56.789.012/0001-34",
     valorTotal: 32400,
     dataSolicitacao: "2026-06-14T16:48:00",
     status: "REPROVADA",
     notas: [{ numero: "NF-44120", valor: 32400, vencimento: "2026-07-09" }],
     motivoReprovacao:
-      "Nota com divergencia de valor frente ao pedido de compra registrado no ERP. Reenvie apos a correcao.",
+      "Nota com divergência de valor frente ao pedido de compra registrado no ERP. Reenvie após a correção.",
     historico: [
       {
-        rotulo: "Solicitacao enviada",
-        ator: "Sul Transmissao Servicos Ltda",
+        rotulo: "Solicitação enviada",
+        ator: "Sul Transmissão Serviços Ltda",
         data: "2026-06-14T16:48:00",
       },
       {
-        rotulo: "Solicitacao reprovada",
+        rotulo: "Solicitação reprovada",
         ator: "Operador CEMIG",
         data: "2026-06-14T18:10:00",
       },
@@ -134,7 +132,7 @@ export const SOLICITACOES: Solicitacao[] = [
   },
   {
     id: "7",
-    numero: "SOL-2035",
+    numero: "00007",
     fornecedor: "Eletrosul Montagens Ltda",
     cnpj: "12.345.678/0001-90",
     valorTotal: 71250,
@@ -146,12 +144,12 @@ export const SOLICITACOES: Solicitacao[] = [
     ],
     historico: [
       {
-        rotulo: "Solicitacao enviada",
+        rotulo: "Solicitação enviada",
         ator: "Eletrosul Montagens Ltda",
         data: "2026-06-14T10:15:00",
       },
       {
-        rotulo: "Solicitacao aprovada",
+        rotulo: "Solicitação aprovada",
         ator: "Operador CEMIG",
         data: "2026-06-14T11:50:00",
       },
@@ -159,7 +157,7 @@ export const SOLICITACOES: Solicitacao[] = [
   },
   {
     id: "8",
-    numero: "SOL-2034",
+    numero: "00008",
     fornecedor: "Hidro Obras Civis Ltda",
     cnpj: "67.890.123/0001-45",
     valorTotal: 158600.4,
@@ -171,7 +169,7 @@ export const SOLICITACOES: Solicitacao[] = [
     ],
     historico: [
       {
-        rotulo: "Solicitacao enviada",
+        rotulo: "Solicitação enviada",
         ator: "Hidro Obras Civis Ltda",
         data: "2026-06-13T15:02:00",
       },
@@ -179,8 +177,8 @@ export const SOLICITACOES: Solicitacao[] = [
   },
   {
     id: "9",
-    numero: "SOL-2033",
-    fornecedor: "Cabos & Conexoes do Sul S.A.",
+    numero: "00009",
+    fornecedor: "Cabos & Conexões do Sul S.A.",
     cnpj: "78.901.234/0001-56",
     valorTotal: 410780,
     dataSolicitacao: "2026-06-13T09:40:00",
@@ -190,15 +188,15 @@ export const SOLICITACOES: Solicitacao[] = [
       { numero: "NF-22046", valor: 205390, vencimento: "2026-08-06" },
     ],
     motivoReprovacao:
-      "Limite de antecipacao do fornecedor para o mes ja atingido. Nova solicitacao a partir do proximo ciclo.",
+      "Limite de antecipação do fornecedor para o mês já atingido. Nova solicitação a partir do próximo ciclo.",
     historico: [
       {
-        rotulo: "Solicitacao enviada",
-        ator: "Cabos & Conexoes do Sul S.A.",
+        rotulo: "Solicitação enviada",
+        ator: "Cabos & Conexões do Sul S.A.",
         data: "2026-06-13T09:40:00",
       },
       {
-        rotulo: "Solicitacao reprovada",
+        rotulo: "Solicitação reprovada",
         ator: "Operador CEMIG",
         data: "2026-06-13T10:25:00",
       },
@@ -206,8 +204,8 @@ export const SOLICITACOES: Solicitacao[] = [
   },
   {
     id: "10",
-    numero: "SOL-2032",
-    fornecedor: "Subestacoes Brasil Engenharia",
+    numero: "00010",
+    fornecedor: "Subestações Brasil Engenharia",
     cnpj: "89.012.345/0001-67",
     valorTotal: 88900,
     dataSolicitacao: "2026-06-12T13:25:00",
@@ -218,12 +216,12 @@ export const SOLICITACOES: Solicitacao[] = [
     ],
     historico: [
       {
-        rotulo: "Solicitacao enviada",
-        ator: "Subestacoes Brasil Engenharia",
+        rotulo: "Solicitação enviada",
+        ator: "Subestações Brasil Engenharia",
         data: "2026-06-12T13:25:00",
       },
       {
-        rotulo: "Solicitacao aprovada",
+        rotulo: "Solicitação aprovada",
         ator: "Operador CEMIG",
         data: "2026-06-12T14:40:00",
       },
